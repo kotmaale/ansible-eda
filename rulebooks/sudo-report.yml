@@ -1,6 +1,6 @@
 ---
 - name: Journald events
-  hosts: all
+  hosts: localhost
   sources:
     - name: Match all messages
       ansible.eda.journald:
