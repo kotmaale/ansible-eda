@@ -1,0 +1,32 @@
+- name: Rulebook to do something
+  hosts: localhost
+  gather_facts: false
+
+  sources:
+      - ansible.eda.webhook:
+          host: 127.0.0.1
+          port: 6777
+
+      - ansible.eda.file_watch:
+          path: "files/"
+          recursive: false
+          ignore_regexes: [ '.*\.o' ]
+  rules:
+      - name: Launch playbook on start cmd
+        condition: event.payload.cmd == 'start'
+        action:
+           run_playbook:
+               name: jp01.yml
+               extra_vars:
+                   dessert: "{{ event.payload.data }}"
+                   home: "{{ HOME }}"       # from environment
+                   person: "{{ person }}"   # from vars
+
+      - name: trigger on range
+        condition: event.change == 'created' # 'modified'
+        action:
+           run_module:
+               name: copy
+               module_args:
+                   src: "{{ event.src_path }}"
+                   dest: "/tmp/files"
