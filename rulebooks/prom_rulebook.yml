@@ -10,7 +10,8 @@
       condition:
         all:
           - event.alert.status == "firing"
-          - event.alert.labels.alertname == "WebsiteDown"
+          - event.alert.alertname == "WebsiteDown"
+          #- event.alert.labels.alertname == "WebsiteDown"
       actions:
         - run_job_template:
             name: Connection Check
