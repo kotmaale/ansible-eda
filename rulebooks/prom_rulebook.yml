@@ -13,5 +13,5 @@
           - event.alert.labels.alertname == "WebsiteDown"
       actions:
         - run_job_template:
-            name: Provision_Webserver
-            organization: Puzzle
+            name: Connection Check
+            organization: eu.aut.AADSMeetfnd4tpslinuxserverMem.us
