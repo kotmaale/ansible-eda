@@ -1,6 +1,7 @@
 ---
 - name: Print webhook message
   hosts: localhost
+ # comments
 
   tasks:
     - name: Print the message
